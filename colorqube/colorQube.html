@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    td {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        margin-left: 100px;
+    }
+    
+    #cc {
+        width: auto;
+        height: auto;
+        border: 1px solid brown;
+        background-color: aquamarine;
+        text-align: center;
+        font-size: 20px;
+        color: blueviolet;
+    }
+    
+    #timer {
+        font-size: 30px;
+        border-radius: 20%;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid black;
+        background-color: aqua;
+        color: red;
+        margin-bottom: 10px;
+    }
+    
+    .op {
+        display: flex;
+        justify-content: center;
+    }
+    
+    #nn {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+    <div class="hello">hello</div>
+    <div class="hello">heyy</div>
+    <div id="nn">
+        <div id="cc">count :</div>
+    </div>
+    <div class="op"><span id="timer"></span></div>
+
+
+
+    <table id="table">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        let keval = document.querySelectorAll("td");
+        let ktbl = document.getElementById("table");
+
+
+        let count = 3;
+        let kev_count = 0;
+
+        let timer = 7;
+        document.getElementById("timer").innerHTML = timer;
+
+        setInterval(() => {
+            if (timer != 0) {
+                let keval;
+                timer--;
+                document.getElementById("timer").innerHTML = timer;
+            } else {
+                clearInterval();
+            }
+
+        }, 1000);
+
+        function RandomValue(min, max) {
+
+            return Math.floor(Math.random() * (max - min) + min);
+
+        }
+
+        function dynamicTable() {
+
+            if (timer == 0) {
+                alert("Time Is Over");
+                return false;
+
+            }
+            count++;
+            timer = timer + 2;
+            let kev_tbl = "";
+
+
+
+
+            for (i = 0; i < count; i++) {
+                kev_tbl += "<tr>";
+                for (j = 0; j < count; j++) {
+                    kev_tbl += "<td></td>";
+                }
+                kev_tbl += "</tr>";
+
+            }
+
+            ktbl.innerHTML = kev_tbl;
+            randomColor();
+
+
+
+        }
+
+        function randomColor() {
+            let r = RandomValue(1, 120);
+            let g = RandomValue(1, 120);
+            let b = RandomValue(1, 120);
+            let a = 1;
+            let keval = document.querySelectorAll("td");
+
+
+            keval.forEach(td => {
+                td.style.backgroundColor = `rgba(${r},${g},${b},${a})`;
+
+            });
+            let klen = keval.length - 1;
+            let rindex = RandomValue(0, klen);
+
+            keval[rindex].style.backgroundColor = `rgba(${r},${g},${b},${0.9})`;
+            keval[rindex].addEventListener('click', dynamicTable);
+            kev_count++;
+            document.getElementById("cc").innerHTML = "Move" + kev_count;
+
+
+
+        }
+
+        randomColor();
+    </script>
+
+</body>
+
+</html>
